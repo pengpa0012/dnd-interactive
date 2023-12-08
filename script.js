@@ -4,7 +4,7 @@ const elements = document.querySelectorAll(".element")
 
 // To Add
 // Add explode/spark animation
-// Add sounds
+// Add different item
 
 items.forEach(el => {
   el.addEventListener("dragend", (e) => {
@@ -13,9 +13,6 @@ items.forEach(el => {
     const elementType = el.attributes["data-type"].value
     const elementImage = el.attributes["data-img"].value
     const newEl = document.createElement("img")
-
-    playAudio("./assets/shh.mp3")
-
     newEl.src = elementImage
     newEl.style.position = `fixed`
     newEl.style.top = `${y}px`
@@ -24,6 +21,7 @@ items.forEach(el => {
     newEl.style.transform = `translate(-50%, -50%)`
     newEl.style.transition = `1000ms ease-in`
     body.appendChild(newEl)
+    playAudio("./assets/shh.mp3")
 
     setTimeout(() => {
       if(elementType == "launch") {
@@ -35,7 +33,10 @@ items.forEach(el => {
         newEl.textContent = "BOOM"
         setTimeout(() => {
           playAudio("./assets/bomb.mp3", 0.2)
-          newEl.remove()
+          // newEl.src = "./assets/explode.png"
+          setTimeout(() => {
+            newEl.remove()
+          }, 1000)
         }, 500)
       }
       
@@ -54,6 +55,7 @@ function animate() {
   elements.forEach(el => {
     if(el.offsetTop < 200) {
       playAudio("./assets/firework.mp3")
+      // el.src = "./assets/explode.png"
       el.remove()
     }
   })
