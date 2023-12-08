@@ -11,16 +11,20 @@ items.forEach(el => {
     const {x, y} = e
     const elementTiming = el.attributes["data-timing"].value
     const elementType = el.attributes["data-type"].value
-    const newEl = document.createElement("div")
-    newEl.textContent = "sparking"
+    const elementImage = el.attributes["data-img"].value
+    const newEl = document.createElement("img")
+
+    playAudio("./assets/shh.mp3")
+
+    newEl.src = elementImage
     newEl.style.position = `fixed`
     newEl.style.top = `${y}px`
     newEl.style.left = `${x}px`
     newEl.className = "item element"
     newEl.style.transform = `translate(-50%, -50%)`
-    newEl.style.transition = `5000ms ease-in`
+    newEl.style.transition = `1000ms ease-in`
     body.appendChild(newEl)
-    console.log(elementType)
+
     setTimeout(() => {
       if(elementType == "launch") {
         // add boom effect after it reach certain px
@@ -30,6 +34,7 @@ items.forEach(el => {
         // add boom effect here before remove
         newEl.textContent = "BOOM"
         setTimeout(() => {
+          playAudio("./assets/bomb.mp3", 0.2)
           newEl.remove()
         }, 500)
       }
@@ -38,17 +43,22 @@ items.forEach(el => {
   })
 })
 
+function playAudio (src, volume = 1) {
+  const audio = new Audio(src)
+  audio.volume = volume
+  audio.play()
+}
+
 function animate() {
   const elements = document.querySelectorAll(".element")
   elements.forEach(el => {
     if(el.offsetTop < 200) {
-      el.textContent = "BOOM"
-      setTimeout(() => {
-        el.remove()
-      }, 500)
+      playAudio("./assets/firework.mp3")
+      el.remove()
     }
   })
   requestAnimationFrame(animate)
 }
 
 animate()
+
