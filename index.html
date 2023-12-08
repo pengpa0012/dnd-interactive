@@ -6,15 +6,16 @@
   <title>DND Interactive</title>
   <script src="./script.js" defer></script>
   <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="./style.css">
 </head>
 <body>
   <h1 class="text-center my-10 text-3xl">DND INTERACTIVE</h1>
   <div class="fixed bottom-0 w-full flex justify-around items-center gap-5 border-2 rounded-md">
-    <h1 class="text-2xl text-center border-2 rounded-md p-4 cursor-grab item" draggable="true" data-type="1">TEST</h1>
-    <h1 class="text-2xl text-center border-2 rounded-md p-4 cursor-grab item" draggable="true" data-type="2">TEST</h1>
-    <h1 class="text-2xl text-center border-2 rounded-md p-4 cursor-grab item" draggable="true" data-type="3">TEST</h1>
-    <h1 class="text-2xl text-center border-2 rounded-md p-4 cursor-grab item" draggable="true" data-type="4">TEST</h1>
-    <h1 class="text-2xl text-center border-2 rounded-md p-4 cursor-grab item" draggable="true" data-type="5">TEST</h1>
+    <h1 class="item" draggable="true" data-timing="2" data-type="pop">ITEM</h1>
+    <h1 class="item" draggable="true" data-timing="1" data-type="pop">ITEM</h1>
+    <h1 class="item" draggable="true" data-timing="3" data-type="launch">ITEM</h1>
+    <h1 class="item" draggable="true" data-timing="4" data-type="pop">ITEM</h1>
+    <h1 class="item" draggable="true" data-timing="3" data-type="launch">ITEM</h1>
   </div>
 </body>
 </html>
