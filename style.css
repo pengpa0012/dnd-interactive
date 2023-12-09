@@ -14,3 +14,11 @@
   cursor: grab;
   width: 100px;
 }
+
+.borderline {
+  width: 100%;
+  bottom: 300px;
+  position: fixed;
+  height: 2px;
+  border: dotted red 2px;
+}
