@@ -4,7 +4,10 @@ const elements = document.querySelectorAll(".element")
 const total = document.querySelector(".total")
 
 let totalExploded = localStorage.getItem("total-explosion")
-total.textContent = `Total Explosion: ${totalExploded}`
+total.textContent = totalExploded || 0
+
+// To Add
+// Add adjust timing on each firecrackers
 
 items.forEach(el => {
   el.addEventListener("dragend", (e) => {
@@ -34,7 +37,7 @@ items.forEach(el => {
           playAudio("./assets/bomb.mp3", 0.2)
           totalExploded++
           localStorage.setItem("total-explosion", totalExploded)
-          total.textContent = `Total Explosion: ${totalExploded}`
+          total.textContent = totalExploded
           newEl.src = "./assets/explode.gif"
           setTimeout(() => {
             newEl.remove()
@@ -59,7 +62,7 @@ function animate() {
       playAudio("./assets/firework.mp3");
       totalExploded++
       localStorage.setItem("total-explosion", totalExploded)
-      total.textContent = `Total Explosion: ${totalExploded}`
+      total.textContent = totalExploded
       el.hasFired = true
       el.src = "./assets/explode.gif";
       setTimeout(() => {
