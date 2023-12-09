@@ -1,16 +1,15 @@
 const items = document.querySelectorAll(".item")
 const body = document.querySelector("body")
 const elements = document.querySelectorAll(".element")
+const total = document.querySelector(".total")
 
-// To Add
-// Add explode/spark animation
-// Add different item
+let totalExploded = localStorage.getItem("total-explosion")
+total.textContent = `Total Explosion: ${totalExploded}`
 
 items.forEach(el => {
   el.addEventListener("dragend", (e) => {
     const {x, y} = e
     if (y < 655) return alert("Drag the firecracker under the red line")
-    console.log(y)
     const elementTiming = el.attributes["data-timing"].value
     const elementType = el.attributes["data-type"].value
     const elementImage = el.attributes["data-img"].value
@@ -27,14 +26,15 @@ items.forEach(el => {
 
     setTimeout(() => {
       if(elementType == "launch") {
-        // add boom effect after it reach certain px
         newEl.style.top = `200px`
         newEl.textContent = "launch"
       } else {
-        // add boom effect here before remove
         newEl.textContent = "BOOM"
         setTimeout(() => {
           playAudio("./assets/bomb.mp3", 0.2)
+          totalExploded++
+          localStorage.setItem("total-explosion", totalExploded)
+          total.textContent = `Total Explosion: ${totalExploded}`
           newEl.src = "./assets/explode.gif"
           setTimeout(() => {
             newEl.remove()
@@ -57,6 +57,9 @@ function animate() {
   elements.forEach(el => {
     if(el.offsetTop == 200 && !el.hasFired) {
       playAudio("./assets/firework.mp3");
+      totalExploded++
+      localStorage.setItem("total-explosion", totalExploded)
+      total.textContent = `Total Explosion: ${totalExploded}`
       el.hasFired = true
       el.src = "./assets/explode.gif";
       setTimeout(() => {
